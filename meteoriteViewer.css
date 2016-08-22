@@ -1,0 +1,23 @@
+body, html{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url('stars.jpg');
+  background-attachment: fixed;
+}
+
+#addressForm {
+  margin-top: 3%
+}
+
+#formSubmit {
+  margin-bottom: 10%;
+}
+
+#meteoriteMap {
+  height: 60%;
+}
