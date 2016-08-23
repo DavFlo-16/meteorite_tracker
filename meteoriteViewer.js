@@ -1,38 +1,57 @@
-//NASA api key = w1T0tMKlC0sZUkHEqHZjOcfNZc1L5X0dRpRIew9N
+//NASA API key = w1T0tMKlC0sZUkHEqHZjOcfNZc1L5X0dRpRIew9N
 //Google Geocoding API = AIzaSyD9djfdEZBOJ6JqbYR2O2_Ymc3haIDUfTY
 
 
-//Interface
 
 
 //Use Google Geocoding API to get Lat, Lng coordinates for address entered by user.
 
-
+// Get address information from User
       $("#formSubmit").click(function(){
+//Create and format variables using inputted address data
         var street = encodeURIComponent($("#inputStreetAdd").val().trim());
         var state = encodeURIComponent($("#inputState").val().trim());
         var city = encodeURIComponent($("#inputCity").val().trim());
         var zipCode = encodeURIComponent($("#inputZipCode").val().trim());
-        var radiusofInterest = $("#radius").val()
+        var radiusOfInterest = $("#radius").val();
+        if (!radiusOfInterest){
+          $('#addressForm').append('<div class="col-sm-8 col-sm-offset-1 errorMessage">You must enter a radius.</div>');
+          return;
+        }
+//Create address variable to use in url for Google Geocode API
         var address = street+city+state+zipCode;
         console.log(address);
+//Send user address to Google Geocode API
         $.ajax({
           method: 'GET',
-              url:`https://maps.googleapis.com/maps/api/geocode/xml?address=${address}&key=AIzaSyD9djfdEZBOJ6JqbYR2O2_Ymc3haIDUfTY`
-    ,
+              url:`https://maps.googleapis.com/maps/api/geocode/xml?address=${address}&key=AIzaSyD9djfdEZBOJ6JqbYR2O2_Ymc3haIDUfTY`,
+              error: function() {
+                $('#addressForm').append('<div class="col-sm-8 col-sm-offset-1 errorMessage">Unrecognized Address</div>');
+              },
               success: function(geoData) {
                 var lat = geoData.getElementsByTagName("location")[0].getElementsByTagName("lat")[0].childNodes[0].nodeValue;
                 var lng = geoData.getElementsByTagName("location")[0].getElementsByTagName("lng")[0].childNodes[0].nodeValue;
                 console.log(geoData);
                 console.log(lat + lng);
+//Send Lat, Lng coordinates to NASA Meteoritical API
                 $.ajax({
                   method: 'GET',
-                      url:`https://data.nasa.gov/resource/y77d-th95.json?$where=within_circle(geolocation, ${lat}, ${lng}, ${radiusofInterest})`,
+                      url:`https://data.nasa.gov/resource/y77d-th95.json?$where=within_circle(geolocation, ${lat}, ${lng}, ${radiusOfInterest})`,
+//Generate Google Map using data obtaines from NASA Meteoritical API.
                       success: function(NASAdata) {
                         console.log(NASAdata);
-                        $('#jQuery').before('<div class="col-sm-8 col-sm-offset-2" id="meteoriteMap"></div>');
-                        createMeteoriteMap(lat, lng, radiusofInterest);
-                        setMeteoriteMapMarkers(NASAdata);
+                        if ($('#meteoriteMap').length > 0){
+                          $('#meteoriteMap').remove(); //Remove map if one is already present on the page
+                        }
+                        if (NASAdata.length){
+                          $('#jQuery').before('<div class="col-sm-8 col-sm-offset-2" id="meteoriteMap"></div>');
+                          createMeteoriteMap(lat, lng, radiusOfInterest);
+                          setMeteoriteMapMarkers(NASAdata);
+                        }
+                        else {
+                          $('#jQuery').before('<div class="col-sm-8 col-sm-offset-2" id="meteoriteMap">No Matches Found</div>');
+                        }
+
                       }
                     });
 
@@ -41,13 +60,14 @@
             });
       });
 
-      //Google Maps API Function Reference
+//Google Maps API Function Reference
 
       var meteoriteMap;
       function createMeteoriteMap(latitude, longitude, radius) {
         meteoriteMap = new google.maps.Map(document.getElementById('meteoriteMap'), {
           center: {lat: parseFloat(latitude), lng: parseFloat(longitude)},
-          zoom: 4,
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.HYBRID,
           styles: [
             {
               featureType: 'all',
@@ -101,19 +121,3 @@
           createMeteoriteMarker(meteoriteData[i]);
         }
       }
-
-
-      // function initMap() {
-      //     var myLatLng = {lat: -25.363, lng: 131.044};
-      //
-      //     var map = new google.maps.Map(document.getElementById('map'), {
-      //       zoom: 1,
-      //       center: myLatLng
-      //     });
-      //
-      //     var marker = new google.maps.Marker({
-      //       position: myLatLng,
-      //       map: map,
-      //       title: 'Hello World!'
-      //     });
-      //   }

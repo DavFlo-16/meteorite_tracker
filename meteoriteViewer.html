@@ -5,43 +5,53 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="meteoriteViewer.css" />
+  <link href="https://fonts.googleapis.com/css?family=Share+Tech" rel="stylesheet">
 
 </head>
 <body>
-  <div id ="addressForm" class="col-sm-4 col-sm-offset-4">
-    <form class="form-horizontal">
-      <div class="form-group">
-          <div class="col-sm-12">
-            <input class="form-control" id="inputStreetAdd" placeholder="Street Address">
+  <div id="header" class="container-fluid">
+    <div class="row">
+      <div id="introText" class="col-sm-3 col-sm-offset-1">
+        Welcome to the Meteorite Viewer App.  Type in an address and radius to generate a Google Map showing all of the known <br />
+        meteorite landings within a circle of your chosen radius.  The information for each meteorite landing is provided by The Meteoritical Society.
+      </div>
+      <div id ="addressForm" class="col-sm-4">
+        <form class="form-horizontal">
+          <div class="form-group">
+              <div class="col-sm-12">
+                <input class="form-control" id="inputStreetAdd" placeholder="Street Address">
+              </div>
           </div>
-      </div>
-      <div class="form-group">
-          <div class="col-sm-12">
-            <input class="form-control" id="inputCity" placeholder="City">
+          <div class="form-group">
+              <div class="col-sm-12">
+                <input class="form-control" id="inputCity" placeholder="City">
+              </div>
           </div>
-      </div>
-      <div class="form-group">
-          <div class="col-sm-12">
-            <input class="form-control" id="inputState" placeholder="State">
+          <div class="form-group">
+              <div class="col-sm-12">
+                <input class="form-control" id="inputState" placeholder="State">
+              </div>
           </div>
-      </div>
-      <div class="form-group">
-          <div class="col-sm-12">
-            <input class="form-control" id="inputZipCode" placeholder="Zip Code">
+          <div class="form-group">
+              <div class="col-sm-12">
+                <input class="form-control" id="inputZipCode" placeholder="Zip Code">
+              </div>
           </div>
-      </div>
-      <div class="form-group">
-          <div class="col-sm-12">
-            <input class="form-control" id="radius" placeholder="Radius of interest (in meters)">
+          <div class="form-group">
+              <div class="col-sm-12">
+                <input class="form-control" id="radius" placeholder="Radius of interest (in meters)">
+              </div>
           </div>
-      </div>
-    </form>
-    <div>
-      <div class="col-sm-offset-2 col-sm-6">
-        <button id ="formSubmit" class="btn btn-default btn-lg">Submit</button>
-      </div>
+        </form>
+        <div>
+          <div id ="formSubmitButtonContainer" class="col-sm-offset-4 col-sm-6">
+            <button id ="formSubmit" class="btn btn-default btn-lg">Submit</button>
+          </div>
+        </div>
     </div>
-</div>
+    </div>
+  </div>
+
 
 
   <script id='jQuery' src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
