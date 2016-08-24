@@ -108,7 +108,10 @@
         position:{lat: parseFloat(meteorite.reclat), lng: parseFloat(meteorite.reclong)},
         });
         var infowindow = new google.maps.InfoWindow({
-        content: `Name: ${meteorite.name} <br> Date: ${meteorite.year}`
+        content: `Name: ${meteorite.name} <br>
+                  Date: ${meteorite.year.slice(5,7)}/${meteorite.year.slice(8,10)}/${meteorite.year.slice(0,4)} <br>
+                  Mass: ${meteorite.mass}g <br>
+                  Location: ${meteorite.reclat}, ${meteorite.reclong}`
         });
 
         marker.setMap(meteoriteMap);

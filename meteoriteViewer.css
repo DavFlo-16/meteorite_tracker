@@ -6,7 +6,7 @@ body, html{
 }
 
 body {
-  background-image: url(large_crater.jpg);
+  background-image: url(large_crater_03.jpg);
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -15,6 +15,7 @@ body {
 
 #header {
   background-image: url('stars.jpg');
+  height: 60%;
   opacity: 0.8;
   background-attachment: fixed;
   margin-bottom: 3%;
