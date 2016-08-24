@@ -15,7 +15,6 @@ body {
 
 #header {
   background-image: url('stars.jpg');
-  height: 60%;
   opacity: 0.8;
   background-attachment: fixed;
   margin-bottom: 3%;
@@ -29,10 +28,15 @@ body {
   font-size: 1.5em;
 }
 
-#addressForm {
+#addressForm, label {
   font-family: 'Share Tech', sans-serif;
   opacity: 1.0;
-  margin-top: 3%
+  margin-top: 3%;
+}
+
+label {
+  color: rgb(206, 209, 212);
+  font-size: 1.1em;
 }
 
 #formSubmit {
